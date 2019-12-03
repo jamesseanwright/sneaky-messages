@@ -6,6 +6,7 @@
 # step of the specification correctly.
 
 import unittest
+import numpy
 import singh
 
 class TestSingh(unittest.TestCase):
@@ -15,6 +16,20 @@ class TestSingh(unittest.TestCase):
     shuffled = singh.shuffle(message_codes)
 
     self.assertEqual(
-      [111, 108, 0, 119, 44, 0, 0, 0, 111, 33, 0, 0, 72],
       shuffled,
+      [111, 108, 0, 119, 44, 0, 0, 0, 111, 33, 0, 0, 72],
+    )
+
+  def test_build_data_matrix(self):
+    shuffled = [111, 108, 0, 119, 44, 0, 0, 0, 111, 33, 0, 0, 72]
+    data_matrix = singh.build_data_matrix(shuffled)
+
+    numpy.testing.assert_equal(
+      data_matrix,
+      numpy.array([
+        [111, 108, 0, 119],
+        [44, 0, 0, 0],
+        [111, 33, 0, 0],
+        [72, 0, 0, 0],
+      ]),
     )

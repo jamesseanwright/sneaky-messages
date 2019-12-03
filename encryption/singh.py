@@ -1,3 +1,6 @@
+import math
+import numpy
+
 magic = [13, 77, 92, 108, 119, 181, 203, 261]
 magic_len = len(magic)
 
@@ -17,3 +20,10 @@ def shuffle(data):
       swap(shuffled, k, x)
 
   return shuffled
+
+def build_data_matrix(shuffled):
+  shuffled_len = len(shuffled)
+  n = math.ceil(math.sqrt(shuffled_len))
+  filled = shuffled + [0] * (n ** 2 - shuffled_len)
+
+  return numpy.reshape(numpy.array(filled), (n, n))
