@@ -11,9 +11,9 @@ def shuffle(data):
   shuffled = list.copy(data)
   data_len = len(data)
 
-  for j in range(1, magic_len + 1):
-    for k in range(1, data_len + 1):
+  for j in range(0, magic_len):
+    for k in range(0, data_len):
       x = ((j + 1) * x + magic[(j + k) % magic_len]) % data_len
       swap(shuffled, k, x)
 
-  shuffled
+  return shuffled
