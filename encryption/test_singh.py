@@ -11,25 +11,31 @@ import singh
 
 class TestSingh(unittest.TestCase):
   def test_shuffle(self):
-    message = 'Hello, world!'
+    message = 'IT IS GENERALISED KEY' # from the whitepaper
     message_codes = [ord(char) for char in message]
     shuffled = singh.shuffle(message_codes)
 
     self.assertEqual(
+      len(message_codes),
+      len(shuffled)
+    )
+
+    self.assertEqual(
       shuffled,
-      [111, 108, 0, 119, 44, 0, 0, 0, 111, 33, 0, 0, 72],
+      [65, 71, 89, 68, 69, 32, 69, 78, 84, 32, 83, 76, 73, 73, 83, 69, 73, 75, 82, 32, 69],
     )
 
   def test_build_data_matrix(self):
-    shuffled = [111, 108, 0, 119, 44, 0, 0, 0, 111, 33, 0, 0, 72]
+    shuffled = [65, 71, 89, 68, 69, 32, 69, 78, 84, 32, 83, 76, 73, 73, 83, 69, 73, 75, 82, 32, 69]
     data_matrix = singh.build_data_matrix(shuffled)
 
     numpy.testing.assert_equal(
       data_matrix,
       numpy.array([
-        [111, 108, 0, 119],
-        [44, 0, 0, 0],
-        [111, 33, 0, 0],
-        [72, 0, 0, 0],
+        [65, 71, 89, 68, 69],
+        [32, 69, 78, 84, 32],
+        [83, 76, 73, 73, 83],
+        [69, 73, 75, 82, 32],
+        [69, 0, 0, 0, 0],
       ]),
     )

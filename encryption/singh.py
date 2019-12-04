@@ -1,13 +1,17 @@
+# This is an implementation of
+# http://www.ijera.com/papers/Vol2_issue4/AZ24339344.pdf
+
 import math
 import numpy
 
-magic = [13, 77, 92, 108, 119, 181, 203, 261]
+magic = [13, 91, 11, 12, 78, 37, 77, 17]
 magic_len = len(magic)
 
-def swap(data, i, j):
-  data[j] = data[i] + data[j]
-  data[i] = data[j] - data[i]
-  data[j] = data[j] - data[i]
+def swap(shuffled, k, x):
+  if (shuffled[k] != shuffled[x]):
+    shuffled[x] = shuffled[k] + shuffled[x]
+    shuffled[k] = shuffled[x] - shuffled[k]
+    shuffled[x] = shuffled[x] - shuffled[k]
 
 def shuffle(data):
   x = 1
@@ -16,7 +20,7 @@ def shuffle(data):
 
   for j in range(0, magic_len):
     for k in range(0, data_len):
-      x = ((j + 1) * x + magic[(j + k) % magic_len]) % data_len
+      x = ((j + 2) * x + magic[(j + k + 1) % magic_len]) % data_len
       swap(shuffled, k, x)
 
   return shuffled
