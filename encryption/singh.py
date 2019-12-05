@@ -33,15 +33,25 @@ def build_data_matrix(shuffled):
 
   return numpy.reshape(numpy.array(filled), (n, n))
 
-def traverse_sine(matrix):
-  # Safe to assume square matrix here
-  matrix_length = matrix.shape[0]
+# Couldn't find a way to do this
+# in NumPy, so had to improvise.
+# TODO: find instrinsic method
+def map_matrix(matrix, transform):
   result = numpy.zeros(matrix.shape)
   it = numpy.nditer(result, flags=['multi_index'])
 
   while not it.finished:
     row, col = it.multi_index
-    result[row, col] = matrix[col if row % 2 == 0 else matrix_length - 1 - col, row]
+    result[row, col] = transform(row, col)
     it.iternext()
 
   return result
+
+def traverse_sine(matrix):
+  # Safe to assume square matrix here
+  matrix_length = matrix.shape[0]
+
+  return map_matrix(
+    matrix,
+    lambda row, col: matrix[col if row % 2 == 0 else matrix_length - 1 - col, row]
+  )
