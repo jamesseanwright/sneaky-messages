@@ -20,10 +20,6 @@ class TestSingh(unittest.TestCase):
       len(shuffled)
     )
 
-    # current result doesn't match result of
-    # whitepaper, despite following algo
-    # and accomodating for 1-based indices
-    # TODO: figure out why
     self.assertEqual(
       shuffled,
       [84, 69, 76, 73, 65, 75, 68, 73, 73, 78, 83, 32, 69, 32, 83, 82, 89, 71, 69, 69, 32],
