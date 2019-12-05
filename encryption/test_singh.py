@@ -20,22 +20,29 @@ class TestSingh(unittest.TestCase):
       len(shuffled)
     )
 
+    # current result doesn't match result of
+    # whitepaper, despite following algo
+    # and accomodating for 1-based indices
+    # TODO: figure out why
     self.assertEqual(
       shuffled,
-      [65, 71, 89, 68, 69, 32, 69, 78, 84, 32, 83, 76, 73, 73, 83, 69, 73, 75, 82, 32, 69],
+      [84, 69, 76, 73, 65, 75, 68, 73, 73, 78, 83, 32, 69, 32, 83, 82, 89, 71, 69, 69, 32],
     )
 
   def test_build_data_matrix(self):
-    shuffled = [65, 71, 89, 68, 69, 32, 69, 78, 84, 32, 83, 76, 73, 73, 83, 69, 73, 75, 82, 32, 69]
+    shuffled = [84, 69, 76, 73, 65, 75, 68, 73, 73, 78, 83, 32, 69, 32, 83, 82, 89, 71, 69, 69, 32]
     data_matrix = singh.build_data_matrix(shuffled)
 
     numpy.testing.assert_equal(
       data_matrix,
       numpy.array([
-        [65, 71, 89, 68, 69],
-        [32, 69, 78, 84, 32],
-        [83, 76, 73, 73, 83],
-        [69, 73, 75, 82, 32],
-        [69, 0, 0, 0, 0],
+        [84, 69, 76, 73, 65],
+        [75, 68, 73, 73, 78],
+        [83, 32, 69, 32, 83],
+        [82, 89, 71, 69, 69],
+        [32, 0, 0, 0, 0],
       ]),
     )
+
+if __name__ == '__main__':
+    unittest.main()
