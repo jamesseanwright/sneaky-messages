@@ -33,6 +33,15 @@ def build_data_matrix(shuffled):
 
   return numpy.reshape(numpy.array(filled), (n, n))
 
-message = 'IT IS GENERALISED KEY' # from the whitepaper
-message_codes = [ord(char) for char in message]
-shuffle(message_codes)
+def traverse_sine(matrix):
+  # Safe to assume square matrix here
+  matrix_length = matrix.shape[0]
+  result = numpy.zeros(matrix.shape)
+  it = numpy.nditer(result, flags=['multi_index'])
+
+  while not it.finished:
+    row, col = it.multi_index
+    result[row, col] = matrix[col if row % 2 == 0 else matrix_length - 1 - col, row]
+    it.iternext()
+
+  return result
