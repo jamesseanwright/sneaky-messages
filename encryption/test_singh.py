@@ -40,7 +40,9 @@ class TestSingh(unittest.TestCase):
       ]),
     )
 
-  def test_traverse_sine(self):
+  # TODO: lift mappers into
+  # separate mod, move tests
+  def test_map_sine(self):
     matrix = numpy.array([
       [84, 69, 76, 73, 65],
       [75, 68, 73, 73, 78],
@@ -49,10 +51,10 @@ class TestSingh(unittest.TestCase):
       [32, 0, 0, 0, 0],
     ], numpy.uint8)
 
-    traversed_matrix = singh.traverse_sine(matrix)
+    mapped_matrix = singh.map_sine(matrix)
 
     numpy.testing.assert_equal(
-      traversed_matrix,
+      mapped_matrix,
       numpy.array([
         [84, 75, 83, 82, 32],
         [0, 89, 32, 68, 69],

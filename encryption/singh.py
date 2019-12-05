@@ -42,16 +42,17 @@ def map_matrix(matrix, transform):
 
   while not it.finished:
     row, col = it.multi_index
-    result[row, col] = transform(row, col)
+    newRow, newCol = transform(row, col)
+    result[row, col] = matrix[newRow, newCol]
     it.iternext()
 
   return result
 
-def traverse_sine(matrix):
+def map_sine(matrix):
   # Safe to assume square matrix here
   matrix_length = matrix.shape[0]
 
   return map_matrix(
     matrix,
-    lambda row, col: matrix[col if row % 2 == 0 else matrix_length - 1 - col, row]
+    lambda row, col: (col if row % 2 == 0 else matrix_length - 1 - col, row)
   )
