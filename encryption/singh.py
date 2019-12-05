@@ -18,10 +18,10 @@ def shuffle(data):
   shuffled = list.copy(data)
   data_len = len(data)
 
-  for j in range(0, magic_len):
-    for k in range(0, data_len):
+  for j in range(magic_len):
+    for k in range(data_len):
       x = ((j + 2) * x + magic[(j + k + 1) % magic_len]) % data_len
-      swap(shuffled, k, x)
+      swap(shuffled, k, x - 1)
 
   return shuffled
 
@@ -31,3 +31,7 @@ def build_data_matrix(shuffled):
   filled = shuffled + [0] * (n ** 2 - shuffled_len)
 
   return numpy.reshape(numpy.array(filled), (n, n))
+
+message = 'IT IS GENERALISED KEY' # from the whitepaper
+message_codes = [ord(char) for char in message]
+shuffle(message_codes)
